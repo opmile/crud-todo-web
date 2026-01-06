@@ -1,9 +1,11 @@
 import Container from "./components/Container"
+import Typography from "./components/ui/Typography"
 
 function App() {
   return (
     <Container>
-      <h1>hello world</h1>
+      <Typography variant="h1">Welcome to the App</Typography>
+      <Typography variant="body">This is a sample application.</Typography>
     </Container>
   )
 }
