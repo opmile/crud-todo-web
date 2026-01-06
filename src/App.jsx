@@ -1,10 +1,10 @@
+import Container from "./components/Container"
+
 function App() {
   return (
-    <div>
-      <p className="text-3xl">
-        Hello world!
-      </p>
-    </div>
+    <Container>
+      <h1>hello world</h1>
+    </Container>
   )
 }
 
