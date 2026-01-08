@@ -5,8 +5,8 @@ import Toolbar from "./components/Toolbar"
 function App() {
   return (
     <Container>
-      <Typography variant="h1">Welcome to the App</Typography>
-      <Typography variant="body">This is a sample application.</Typography>
+      <Typography variant="h1">your tasks for today...</Typography>
+      <Typography variant="body">all you need done in one simple page</Typography>
 
       <Toolbar/>
     </Container>
