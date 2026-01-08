@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from "react";
 
 const ModalContext = createContext(null)
 
-export function useModal() {
-    const context = useContext(ModalContext)
+export function useModal() { // open a portal for the modal (consumers will use this hook to access the context)
+    const context = useContext(ModalContext) 
 
     if (!context) {
         throw new Error("useModal must be used within Modal.Root")
@@ -19,9 +19,9 @@ const ModalProvider = ({ children }) => {
     const closeModal = () => setIsOpen(false);
 
     return (
-        <ModalContext value={{ isOpen, openModal, closeModal }}>
+        <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
             {children}
-        </ModalContext>
+        </ModalContext.Provider>
     );
 }
 
