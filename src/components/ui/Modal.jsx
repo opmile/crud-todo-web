@@ -29,7 +29,7 @@ const ModalContent = ({ children }) => {
         <dialog
             ref={dialogRef}
             onClose={closeModal}
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-0 m-0 border-0 rounded-lg shadow-lg w-11/12 max-w-lg"
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-0 m-0 border-0 rounded-xl shadow-2xl w-11/12 max-w-lg backdrop:bg-black/40 backdrop:backdrop-blur-xs"
             >
             {children}
         </dialog>
@@ -47,7 +47,7 @@ const Header = ({ children }) => {
 
 const Body = ({ children }) => {
     return (
-        <div className="p-4">
+        <div className="p-4 flex flex-col gap-2">
             {children}
         </div>
     )
