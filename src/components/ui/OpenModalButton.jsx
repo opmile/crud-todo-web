@@ -1,7 +1,7 @@
 import { useModal } from "../context/ModalProvider"
 import Button from "./Button"
 
-const OpenModalButton = ({ className = '' }) => {
+export default function OpenModalButton({ className = '' }) {
     const { openModal } = useModal()
     
     return (
@@ -13,5 +13,3 @@ const OpenModalButton = ({ className = '' }) => {
         </Button>
     )
 }
-
-export default OpenModalButton
