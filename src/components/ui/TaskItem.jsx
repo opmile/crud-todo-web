@@ -18,7 +18,7 @@ export default function TaskItem({ task }) {
                     {task.title}
                 </span>
             </div>
-            <IconContainer taskId={task.id} />
+            <IconContainer taskId={task.id} currentTitle={task.title} />
         </div>
     )
 }
