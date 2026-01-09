@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react"
 
 const TaskContext = createContext(null) 
 
-export function useTask() { // open a portal for the task (consumers will use this hook to access the context)
+export function useTasksContext() { // open a portal for the task (consumers will use this hook to access the context)
     const context = useContext(TaskContext)
 
     if (!context) {
@@ -18,6 +18,9 @@ const TaskProvider = ({ children }) => {
         { id: 2, title: "Task 2", completed: true },
         { id: 3, title: "Task 3", completed: false },
     ]) 
+
+    const pendingTasks = tasks.filter(task => !task.completed)
+    const completedTasks = tasks.filter(task => task.completed)
 
     const addTask = (task) => 
         setTasks((prevTasks) => {
@@ -65,6 +68,8 @@ const TaskProvider = ({ children }) => {
                 createTask,
                 deleteTask,
                 updateTaskText,
+                pendingTasks,
+                completedTasks
             }}
         >
             {children}
