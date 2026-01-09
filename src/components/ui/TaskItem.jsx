@@ -1,6 +1,6 @@
 import { useTasksContext } from "../context/TaskProvider"
 import Checkbox from "./Checkbox"
-import Icon from "./Icon"
+import IconContainer from "./IconContainer"
 
 export default function TaskItem({ task }) {
     const { toggleTaskCompletion } = useTasksContext()
@@ -18,10 +18,7 @@ export default function TaskItem({ task }) {
                     {task.title}
                 </span>
             </div>
-            <div className="ml-auto flex items-center gap-1">
-                <Icon src="/trash-bin.png" alt="Delete Icon" />
-                <Icon src="/edit-icon.png" alt="Edit Icon" />
-            </div>
+            <IconContainer taskId={task.id} />
         </div>
     )
 }
