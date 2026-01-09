@@ -7,8 +7,8 @@ export default function TaskSection() {
 
     return (
         <Section>
-            <SectionColumn title="Pending Tasks" tasks={pendingTasks} />
-            <SectionColumn title="Completed Tasks" tasks={completedTasks} />
+            <SectionColumn title="pending" tasks={pendingTasks} />
+            <SectionColumn title="completed" tasks={completedTasks} />
         </Section>
     )
 }
