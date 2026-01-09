@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react" 
+import { createContext, useContext, useEffect, useState } from "react" 
 
 const TaskContext = createContext(null) 
 
@@ -12,8 +12,26 @@ export function useTasksContext() { // open a portal for the task (consumers wil
     return context
 }
 
+const STORAGE_KEY = "crud-todo:tasks"
+
 const TaskProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([]) 
+    const [tasks, setTasks] = useState(() => {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY)
+            const parsed = raw ? JSON.parse(raw) : []
+            return Array.isArray(parsed) ? parsed : []
+        } catch {
+            return []
+        }
+    }) 
+
+    useEffect(() => {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks))
+        } catch {
+            // ignore write errors (e.g. private mode / quota)
+        }
+    }, [tasks])
 
     const pendingTasks = tasks.filter(task => !task.completed)
     const completedTasks = tasks.filter(task => task.completed)
