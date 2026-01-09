@@ -3,7 +3,7 @@ import Typography from "./Typography";
 
 export default function SectionColumn({ title, tasks }) {
   return (
-    <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6 mb-4">
+    <div className="w-full bg-white rounded-lg shadow-md p-4 sm:p-5 md:p-6 mb-4">
       <div className="flex items-center justify-between mb-2">
         <Typography variant="h3" className="mb-4">
           {title}
