@@ -1,6 +1,5 @@
 import Form from "./Form"
 import Modal from "./ui/Modal"
-import Typography from "./ui/Typography"
 
 export default function Toolbar() {
     return (

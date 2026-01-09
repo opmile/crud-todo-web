@@ -10,7 +10,7 @@ export default function OpenModalButton({ className = '' }) {
             variant="primary"
             className="self-center"
             >
-            add new
+            + new task
         </Button>
     )
 }
