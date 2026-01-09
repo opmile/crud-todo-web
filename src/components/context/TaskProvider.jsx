@@ -13,11 +13,7 @@ export function useTasksContext() { // open a portal for the task (consumers wil
 }
 
 const TaskProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([
-        { id: 1, title: "Task 1", completed: false },
-        { id: 2, title: "Task 2", completed: true },
-        { id: 3, title: "Task 3", completed: false },
-    ]) 
+    const [tasks, setTasks] = useState([]) 
 
     const pendingTasks = tasks.filter(task => !task.completed)
     const completedTasks = tasks.filter(task => task.completed)

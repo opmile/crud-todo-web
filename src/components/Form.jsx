@@ -5,18 +5,25 @@ import Input from "./ui/Input";
 import Typography from "./ui/Typography";
 
 export default function Form() {
-    const { closeModal, mode, editableTask } = useModal()
+    const { closeModal, mode, editableTask, isOpen } = useModal()
     const { createTask, updateTaskText } = useTasksContext()
 
     const [value, setValue] = useState("")
 
     useEffect(() => {
+        // when modal closes, always clear the field
+        if (!isOpen) {
+            setValue("")
+            return
+        }
+
+        // when modal opens, prefill only for edit mode
         if (mode === "edit" && editableTask) {
             setValue(editableTask.title ?? "")
         } else {
             setValue("")
         }
-    }, [mode, editableTask])
+    }, [isOpen, mode, editableTask])
 
     const handleSubmit = (e) => {
         e.preventDefault()

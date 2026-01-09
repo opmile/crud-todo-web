@@ -9,7 +9,7 @@ const variantToTag = {
 const variantToClassName = {
     h1: 'text-4xl font-bold',
     h2: 'text-3xl font-semibold',
-    h3: 'text-2xl font-medium',
+    h3: 'text-2xl font-medium opacity-80',
     body: 'text-base',
     caption: 'text-sm text-gray-500',
 }
