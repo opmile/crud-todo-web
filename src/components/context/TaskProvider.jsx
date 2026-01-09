@@ -19,7 +19,12 @@ const TaskProvider = ({ children }) => {
         { id: 3, title: "Task 3", completed: false },
     ]) 
 
-    const addTask = (task) => setTasks((prevTasks) => [...prevTasks, task]) 
+    const addTask = (task) => 
+        setTasks((prevTasks) => {
+            const maxId = prevTasks.reduce((max, t) => Math.max(max, t.id), 0)
+            return [...prevTasks, { id: maxId + 1, ...task }]
+        }) 
+
     const removeTask = (taskId) => setTasks((prevTasks) => prevTasks.filter(task => task.id !== taskId)) 
 
     const toggleTaskCompletion = (taskId) => {
@@ -29,12 +34,42 @@ const TaskProvider = ({ children }) => {
             )
         )
     }
+
+    const createTask = (title) => {
+        const newTask = {
+            title,
+            completed: false,
+        }
+        addTask(newTask)
+    }
+
+    const deleteTask = (id) => {
+        removeTask(id)
+    }
+
+    const updateTaskText = (id, title) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === id ? { ...task, title } : task
+            )
+        )
+    }
     
     return (
-        <TaskContext.Provider value={{ tasks, addTask, removeTask, toggleTaskCompletion }}>
+        <TaskContext.Provider
+            value={{
+                tasks,
+                addTask,
+                removeTask,
+                toggleTaskCompletion,
+                createTask,
+                deleteTask,
+                updateTaskText,
+            }}
+        >
             {children}
         </TaskContext.Provider>
     ) 
 }
 
-export default TaskProvider 
+export default TaskProvider

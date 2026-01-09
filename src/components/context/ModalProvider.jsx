@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react"  
 
 const ModalContext = createContext(null)
 
@@ -13,16 +13,16 @@ export function useModal() { // open a portal for the modal (consumers will use 
 }
 
 const ModalProvider = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false)  
 
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+    const openModal = () => setIsOpen(true)  
+    const closeModal = () => setIsOpen(false)  
 
     return (
         <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
             {children}
         </ModalContext.Provider>
-    );
+    )  
 }
 
-export default ModalProvider;
+export default ModalProvider  
