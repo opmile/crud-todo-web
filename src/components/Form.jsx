@@ -1,14 +1,20 @@
 import { useModal } from "./context/ModalProvider";
+import { useTasksContext } from "./context/TaskProvider";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 
 export default function Form({ children }) {
     const { closeModal } = useModal()
+    const { createTask } = useTasksContext()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // form submission: logic can be added here   
-        // task context needs to be created to handle tasks submissions (add task)
+        
+        const formData = new FormData(e.target);
+        const taskDescription = formData.get("taskDescription");
+
+        createTask(taskDescription);
+        e.target.reset();
 
         closeModal()
     }
