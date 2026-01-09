@@ -35,7 +35,7 @@ const ModalContent = ({ children }) => {
           e.preventDefault() 
           closeModal() 
         }}
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-0 m-0 border-0 rounded-xl shadow-2xl w-11/12 max-w-lg backdrop:bg-black/40 backdrop:backdrop-blur-xs"
+        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-0 m-0 border-0 rounded-lg sm:rounded-xl shadow-2xl w-[95vw] sm:w-11/12 max-w-lg max-h-[85vh] overflow-auto backdrop:bg-black/40 backdrop:backdrop-blur-xs"
       >
         {children}
       </dialog>
@@ -81,4 +81,4 @@ const Modal = {
   Footer,
 } 
 
-export default Modal 
+export default Modal

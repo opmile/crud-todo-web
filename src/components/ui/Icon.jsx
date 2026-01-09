@@ -1,10 +1,10 @@
-export default function Icon({ src, alt, onClick }) {
+export default function Icon({ src, alt, onClick, className = "" }) {
 
     return (
         <img
             src={src}
             alt={alt}
-            className="w-4 h-4 object-contain hover:opacity-80 opacity-40 transition-opacity duration-400 cursor-pointer"
+            className={`object-contain hover:opacity-80 opacity-40 transition-opacity duration-400 cursor-pointer ${className || "w-4 h-4"}`}
             loading="lazy"
             decoding="async"
             onClick={onClick}
