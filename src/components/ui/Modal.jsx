@@ -1,14 +1,15 @@
 import { useEffect, useRef } from "react"
-import ModalProvider, { useModal } from "../context/ModalProvider"
+import { useModal } from "../context/ModalProvider"
 import Button from "./Button"
 import OpenModalButton from "./OpenModalButton"
+import Typography from "./Typography"
 
 const Root = ({ children }) => {
     return (
-        <ModalProvider>
+        <>
             <OpenModalButton/>
             <ModalContent>{children}</ModalContent>
-        </ModalProvider>
+        </>
     )
 }
 
@@ -29,6 +30,11 @@ const ModalContent = ({ children }) => {
         <dialog
             ref={dialogRef}
             onClose={closeModal}
+            onCancel={(e) => {
+                // prevent browser default which can desync state in some cases
+                e.preventDefault()
+                closeModal()
+            }}
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-0 m-0 border-0 rounded-xl shadow-2xl w-11/12 max-w-lg backdrop:bg-black/40 backdrop:backdrop-blur-xs"
             >
             {children}
@@ -37,10 +43,17 @@ const ModalContent = ({ children }) => {
    )
 }
 
-const Header = ({ children }) => {
+const Header = () => {
+    const { mode } = useModal()
+    const defaultTitle = mode === "edit" 
+        ? "edit task" 
+        : "for today"
+
     return (
         <div className="p-4 border-b border-gray-300">
-            {children}
+            <Typography variant="h2">
+                {defaultTitle}
+            </Typography>
         </div>
     )
 }
@@ -53,13 +66,22 @@ const Body = ({ children }) => {
     )
 }
 
-const Footer = ({ children }) => {
-    const { closeModal } = useModal()
-    
+const Footer = () => {
+    const { closeModal, mode } = useModal()
+    const primaryLabel = mode === "edit" 
+        ? "save" 
+        : "add"
+
     return (
         <div className="p-4 border-t border-gray-300 flex justify-end space-x-2">
-            <Button onClick={closeModal}>Close</Button>
-            {children}
+            <Button variant="cancel" onClick={closeModal}>cancel</Button>
+            <Button
+                variant="secondary"
+                type="submit"
+                form="task-form"
+            >
+                {primaryLabel}
+            </Button>
         </div>
     )
 }

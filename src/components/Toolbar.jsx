@@ -4,15 +4,13 @@ import Typography from "./ui/Typography"
 
 export default function Toolbar() {
     return (
-        <Modal.Root>
-        <Modal.Header>
-          <Typography variant="h2">for today</Typography>
-        </Modal.Header>
+      <Modal.Root>
+        <Modal.Header/>
         <Modal.Body>
-          <Typography variant="body">specify new task description</Typography>
-          <Form/>
+          {/* form shows mode-dependent hint and input */}
+          <Form />
         </Modal.Body>
-        <Modal.Footer/>
+        <Modal.Footer />
       </Modal.Root>
     )
 }

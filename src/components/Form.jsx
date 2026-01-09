@@ -1,32 +1,61 @@
+import { useEffect, useState } from "react";
 import { useModal } from "./context/ModalProvider";
 import { useTasksContext } from "./context/TaskProvider";
-import Button from "./ui/Button";
 import Input from "./ui/Input";
+import Typography from "./ui/Typography";
 
-export default function Form({ children }) {
-    const { closeModal } = useModal()
-    const { createTask } = useTasksContext()
+export default function Form() {
+    const { closeModal, mode, editableTask } = useModal()
+    const { createTask, updateTaskText } = useTasksContext()
+
+    const [value, setValue] = useState("")
+
+    useEffect(() => {
+        if (mode === "edit" && editableTask) {
+            setValue(editableTask.title ?? "")
+        } else {
+            setValue("")
+        }
+    }, [mode, editableTask])
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(e.target);
-        const taskDescription = formData.get("taskDescription");
+        e.preventDefault()
 
-        createTask(taskDescription);
-        e.target.reset();
+        const trimmed = value.trim()
+        if (!trimmed) return
+
+        if (mode === "edit") {
+            if (!editableTask) return
+            updateTaskText(editableTask.id, trimmed)
+        } else {
+            createTask(trimmed)
+        }
 
         closeModal()
     }
-    
+
+    const helpText = mode === "edit" 
+    ? "update task description" 
+    : "specify new task description"
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form 
+            id="task-form" 
+            onSubmit={handleSubmit} 
+            className="space-y-4"
+            >
+            <Typography className="text-sm text-gray-600">{helpText}</Typography>
             <Input
                 name="taskDescription"
                 id="taskDescription"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder={
+                    mode === "edit" 
+                    ? "edit task..." 
+                    : "new task..."}
                 required
             />
-            <Button type="submit" className="ml-1 rounded-xl">Add Task</Button>
         </form>
     )
 }
